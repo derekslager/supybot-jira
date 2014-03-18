@@ -71,8 +71,8 @@ class Jira(callbacks.PluginRegexp):
         issueName = match.group('issue')
         try:
             issue = self.jira.issue(issueName)
-        except:
-            print "Invalid Jira snarf: %s" % issueName
+        except Exception, e:
+            self.log.exception('Error loading issue.', e)
             return
 
         if issue:
